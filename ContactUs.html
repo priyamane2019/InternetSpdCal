@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Login Form</title>
+    <style>
+      body {
+                padding: 10px 50px;
+            }
+
+            .container {
+                background-color: #fff;
+                border-radius: 5px;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+                width: 400px;
+                padding: 30px 40px;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .formdesign {
+                font-size: 20px;
+
+            }
+        .back{
+            display:flex;
+        }
+        .back1{
+            width:200px;
+        }
+        .back2{
+            width:200px;
+        }
+        
+            .formdesign input {
+                width: 50%;
+                padding: 12px 20px;
+                border: 1px solid blue;
+                margin: 14px;
+                border-radius: 4px;
+                font-size: 15px;
+            }
+
+            .formerror {
+                color: red;
+            }
+
+            .but {
+                border-radius: 9px;
+                width: 100px;
+                height: 50px;
+                font-size: 25px;
+                margin: 22px 20px;
+                background-color: blue;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Contact Us</h1>
+        <form aciton="/myaction.php" name="myForm" onsubmit= " validateForm()" method="post">
+            <div class="formdesign" id="UserName">
+                <label for="Name">User Name</label><br>
+                <input type="text" name="fUserName" autocomplete="off" required><br>
+                <b><small class="formerror"> </small></b>
+            </div>
+
+            <div class="formdesign" id="MobileNumber">
+                <label for="MoNo">Mobile Number</label><br>
+                <input type="text" name="MobileNo" autocomplete="off" required><br>
+              
+            </div>
+
+
+
+            <div class="formdesign" id="pass">
+                <label for="fpass">Password</label><br>
+                <input type="password" id="psw" name="fpass" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                    title="*Password should be atleast 6 characters long! Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+                    required>
+                <b><span class="formerror" </span></b>
+            </div>
+
+            <div class="formdesign" id="cpass">
+                <label for="fcpass">Confirm Password</label><br>
+                <input type="password" name="fcpass" autocomplete="off" required><br>
+                <b><small class="formerror"></small></b>
+            </div>
+
+            <input class="but" onclick="myForm()" type="submit" value="Submit">
+            </form>
+            <div class="back">
+           <div class="back2">
+            <a href="index.html"> Go Back</a>
+           </div>
+            </div>
+        
+<script>
+    function clearErrors() {
+
+errors = document.getElementsByClassName('formerror');
+for (let item of errors) {
+    item.innerHTML = "";
+}
+
+
+}
+function seterror(id, error) {
+element = document.getElementById(id);
+element.getElementsByClassName('formerror')[0].innerHTML = error;
+
+}
+function validateForm() {
+var returnval = true;
+clearErrors();
+var UserName = document.forms['myForm']["fUserName"].value;
+if (UserName.length > 4) {
+    seterror("UserName", "*Length of UserName is too short");
+    returnval = false;
+}
+var password = document.forms['myForm']["fpass"].value;
+if (password.length < 8 && password != "(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}") {
+    seterror("pass", "*Password should be atleast 6 characters long! Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters");
+    returnval = false;
+}
+var cpassword = document.forms['myForm']["fcpass"].value;
+if (cpassword != password) {
+    seterror("cpass", "*Password and Confirm password should match!");
+    returnval = false;
+}
+return returnval;
+}
+</script>
+</body>
+</html>
